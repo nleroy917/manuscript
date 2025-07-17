@@ -91,6 +91,7 @@
     show heading.where( level: 1 ): set text(
         font: "Helvetica",
         size: 16pt,
+        weight: "extrabold"
     )
     show heading.where( level: 2 ): set text(
         font: "Helvetica",
@@ -152,6 +153,9 @@
     show figure.where(
         kind: table
     ): set figure.caption(position: top)
+    set figure(
+        supplement: [Fig.],
+    )
     
     maketitle(title)
     v(8pt)
@@ -166,5 +170,16 @@
     columns(2)[
         #doc
     ]
-    
+}
+
+#let backmatter(doc) = {
+    state("backmatter").update(true)
+    set figure(
+        numbering: "S1",
+        supplement: "Supplemental Figure"
+    )
+    counter(figure.where(kind: image)).update(0)
+    counter(figure.where(kind: table)).update(0)
+
+    doc
 }
